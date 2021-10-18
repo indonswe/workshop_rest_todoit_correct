@@ -11,6 +11,7 @@ import se.lexicon.todo_it_api.model.entity.Person;
 import se.lexicon.todo_it_api.model.entity.TodoItem;
 import se.lexicon.todo_it_api.model.forms.PersonFormDto;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -72,17 +73,48 @@ public class PersonServiceImpl implements PersonService{
 
     @Override
     public PersonDto findById(Integer personId) {
-        return null;
+
+        Optional<Person> foundPerson = personDao.findById(personId);
+
+        if (foundPerson.isPresent()){
+            return convert.toPersonDto(foundPerson.get());
+        } else {
+            throw new IllegalArgumentException("Could not find By Id");
+        }
+
+        ///
+
     }
 
     @Override
     public List<PersonDto> findAll() {
-        return null;
+
+        List<PersonDto> personDtos = new ArrayList<>();
+
+        for(Person person: personDao.findAll()){
+            personDtos.add(convert.toPersonDto(person));
+        }
+
+        return personDtos;
     }
 
     @Override
     public List<PersonDto> findIdlePeople() {
-        return null;
+
+
+
+            List<PersonDto> personDtos = new ArrayList<>();
+
+            for(Person person: personDao.findAll()){
+                if (person.getTodoItems().isEmpty()) {
+                    personDtos.add(convert.toPersonDto(person));
+                }
+            }
+
+            return personDtos;
+
+
+
     }
 
     @Override
