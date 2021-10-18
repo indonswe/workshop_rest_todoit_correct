@@ -1,5 +1,6 @@
 package se.lexicon.todo_it_api.service;
 
+import org.springframework.stereotype.Service;
 import se.lexicon.todo_it_api.model.dto.PersonDto;
 import se.lexicon.todo_it_api.model.dto.PersonDtoSmall;
 import se.lexicon.todo_it_api.model.dto.TodoItemDto;
@@ -11,7 +12,7 @@ import se.lexicon.todo_it_api.model.forms.TodoItemFormDto;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Service
 public class ConversionService {
 
 
